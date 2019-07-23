@@ -8,7 +8,7 @@ import requests
 from bs4 import BeautifulSoup
 
 #url = 'http://www.zjepb.gov.cn/art/2018/11/21/art_1201950_25491698.html'
-url = 'http://www.zjepb.gov.cn/art/2018/9/28/art_1201950_21582389.html'
+url = 'http://www.zjepb.gov.cn/col/col1201347/index.html'
 response = requests.get(url)
 response.encoding = "utf-8"
 
@@ -81,6 +81,7 @@ title = oBject.find('div', class_='mainContainer;').findAll('tr')[0].getText()
 data_info['标题'] = title
 
 x = oBject.find("div", class_='mainContainer;').findAll('a')
+print(x)
 pdf_url_list = []
 pdf_name_list = []
 for i in range(len(x)):

@@ -34,7 +34,7 @@ class Handler(BaseHandler):
                   '&vc_filenumber=&vc_all=&texttype=&fbtime=&texttype=&fbtime=&vc_all=&vc_filenumber=&' \
                   'vc_title=&vc_number=&currpage={}&sortfield=,compaltedate:0'.format(str(i), str(i))
             url_list.append(url)
-        self.crawl(url_list, callback=self.zjhp_condition_remains)
+        self.crawl(url_list, timeout=10, callback=self.zjhp_condition_remains)
 
 
     @config(age=24 * 60 * 60)

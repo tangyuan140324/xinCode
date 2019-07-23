@@ -40,8 +40,5 @@ print(infos_list)
 total_page = re.findall(r'&nbsp;&nbsp;共(.*?)页&nbsp;', html_content, re.S)[0]
 print(total_page)
 
-remian_urls = []
-for page_number in range(2,int(total_page)+1):
-    unit_url =
 
 

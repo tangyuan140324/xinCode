@@ -3,21 +3,35 @@
 # @Time    : 2019/7/17 上午10:46
 # @Author  : dexin.Huang
 # @File    : sinopec_html.py
+import operator
+import time
+from functools import reduce
 
 import requests
 from bs4 import BeautifulSoup
-url = 'http://www.phosphatechina.com/'
+home_page = 'http://www.cnpc.com.cn/cnpc/index.shtml'
 
-response = requests.get(url)
+response = requests.get(home_page)
 #response.encoding = 'gzip'
 infos = BeautifulSoup(response.content, 'lxml')
-url_remains = infos.findAll('li', class_='menu-item')
+url_remains = infos.find('div', class_='mainNav').findAll('a')
 # print(url_remains)
-# print(len(url_remains))
+# exit()
 url_list = []
 for item in url_remains:
     dic = {}
-    dic['lable_url'] = url + item.a['href']
-    dic['lable'] = item.a.getText().replace('  ', '')
+    # if 'http://www.cnpc.com.cn' or 'http://csr.cnpc.com.cn' in item['href']:
+    #     dic['url'] = item['href']
+    # elif 'http://news.cnpc.com.cn' in item['href']:
+    #     dic['url'] = item['href']
+    # else:
+    #     dic['url'] = 'http://www.cnpc.com.cn' + item['href'].replace('../..', '')
+    dic['url'] = item['href']
+    dic['type'] = 'company'
+    dic["create_time"] = time.strftime("%Y-%m-%d %H:%M:%S")
+    dic["source"] = "中国海洋石油集团有限公司"
+    dic['lable'] = item.getText()
     url_list.append(dic)
+
 print(url_list)
+
