@@ -16,7 +16,12 @@ import traceback
 from bs4 import BeautifulSoup
 from pyspider.libs.base_handler import *
 from util import make_index, mysql_tool
-
+# Execute on the test server
+with open("/web/spider/config/config.test.json", 'r') as f:
+    data = json.loads(f.read())
+    mysql_table_pdf_download = data['result_worker']['result_settings']['mysql_table_pdf_download']
+    mysql_table_html_download = data['result_worker']['result_settings']['mysql_table_html_download']
+# Execute locally
 cf = configparser.ConfigParser()
 cf.read("/web/spider/config/host.conf")
 mysql_table_pdf_download = cf.get('Mysql', 'mysql_table_pdf_download')
